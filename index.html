@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="en" data-aura="pink-lavender">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starlight Sanctuary — Pink &amp; Lavender Glittery Dreamscape</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* =====================================================================
+           1. DESIGN TOKENS & TRIMMED ELEGANT TYPOGRAPHY
+           ===================================================================== */
+        :root {
+            --font-display: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+            --font-body: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+            --bg-gradient: linear-gradient(135deg, #ffd6ec 0%, #f4a8d8 36%, #e4c6ff 72%, #d8b4fe 100%);
+            --card-bg: rgba(255, 250, 254, 0.84);
+            --card-border: rgba(236, 72, 153, 0.28);
+            --ink-primary: #3b1348;
+            --ink-secondary: #6d2d7c;
+            --accent-pink: #e83e9c;
+            --accent-lavender: #9b51e0;
+            --accent-glow: rgba(232, 62, 156, 0.28);
+            --pill-active-bg: linear-gradient(135deg, #ec4899 0%, #9b51e0 100%);
+            --jar-fill: linear-gradient(180deg, #f472b6 0%, #c084fc 55%, #9333ea 100%);
+            --orb-1: rgba(244, 114, 182, 0.45);
+            --orb-2: rgba(192, 132, 252, 0.45);
+            --orb-3: rgba(251, 207, 232, 0.55);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--ink-primary);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-display-trim {
+            font-family: var(--font-display);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            color: var(--ink-primary);
+        }
+
+        .font-italic-trim {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.005em;
+            color: var(--ink-secondary);
+        }
+
+        .font-mono-trim {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--ink-secondary);
+        }
+
+        /* =====================================================================
+           2. NON-BLOCKING BACKDROP & GLITTER CANVAS LAYERING
+           ===================================================================== */
+        .bokeh-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none !important;
+            overflow: hidden;
+        }
+
+        .bokeh-orb {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(56px);
+            opacity: 0.65;
+            pointer-events: none !important;
+            animation: driftOrb 12s ease-in-out infinite alternate;
+        }
+
+        .bokeh-orb.orb-a {
+            width: 340px;
+            height: 340px;
+            top: -60px;
+            left: -60px;
+            background: var(--orb-1);
+        }
+
+        .bokeh-orb.orb-b {
+            width: 380px;
+            height: 380px;
+            bottom: -90px;
+            right: -70px;
+            background: var(--orb-2);
+            animation-delay: -4s;
+        }
+
+        .bokeh-orb.orb-c {
+            width: 260px;
+            height: 260px;
+            top: 38%;
+            left: 52%;
+            background: var(--orb-3);
+            animation-delay: -8s;
+        }
+
+        @keyframes driftOrb {
+            0% { transform: translate(0px, 0px) scale(1); }
+            100% { transform: translate(26px, -22px) scale(1.08); }
+        }
+
+        #glitter-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none !important;
+            display: block;
+        }
+
+        #app-shell {
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        /* =====================================================================
+           3. SANCTUARY CARDS, PILLS & GLITTER BUTTONS
+           ===================================================================== */
+        .sanctuary-card {
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border);
+            border-radius: 22px;
+            box-shadow: 0 12px 32px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .sanctuary-card:hover {
+            border-color: var(--accent-pink);
+            box-shadow: 0 16px 38px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        .pill-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            line-height: 1.2;
+            color: var(--ink-primary);
+            background: rgba(255, 255, 255, 0.78);
+            border: 1.5px solid var(--card-border);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            user-select: none;
+        }
+
+        .pill-btn:hover {
+            background: rgba(255, 255, 255, 0.96);
+            border-color: var(--accent-pink);
+            transform: translateY(-1px);
+        }
+
+        .pill-btn.is-active {
+            color: #ffffff;
+            background: var(--pill-active-bg);
+            border-color: transparent;
+            box-shadow: 0 6px 16px var(--accent-glow);
+        }
+
+        .glitter-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 9px 18px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.25;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-lavender) 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 8px 20px var(--accent-glow);
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+            user-select: none;
+        }
+
+        .glitter-action-btn:hover {
+            transform: translateY(-1.5px);
+            filter: brightness(1.05);
+            box-shadow: 0 12px 26px var(--accent-glow);
+        }
+
+        .glitter-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .dream-input {
+            width: 100%;
+            padding: 9px 14px;
+            border-radius: 14px;
+            font-size: 0.86rem;
+            color: var(--ink-primary);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid var(--card-border);
+            outline: none;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .dream-input:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+
+        /* =====================================================================
+           4. STARDUST JAR, CRYSTAL BALL & POPCORN STAGE
+           ===================================================================== */
+        .jar-vessel {
+            position: relative;
+            width: 112px;
+            height: 144px;
+            margin: 0 auto;
+            border-radius: 20px 20px 28px 28px;
+            border: 3px solid rgba(255, 255, 255, 0.92);
+            box-shadow: 0 10px 24px var(--accent-glow), inset 0 0 18px rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.45);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .jar-vessel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 74%;
+            height: 10px;
+            background: linear-gradient(90deg, #f472b6, #c084fc);
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            z-index: 4;
+        }
+
+        .jar-liquid {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 0%;
+            background: var(--jar-fill);
+            transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 2;
+        }
+
+        .jar-liquid::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.85) 1.5px, transparent 1.5px);
+            background-size: 14px 14px;
+            opacity: 0.65;
+            animation: shimmerJar 4s linear infinite;
+        }
+
+        @keyframes shimmerJar {
+            0% { background-position: 0 0; }
+            100% { background-position: 28px -28px; }
+        }
+
+        .crystal-orb {
+            width: 112px;
+            height: 112px;
+            margin: 0 auto;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 32% 28%, #ffffff 0%, #fbcfe8 34%, #d8b4fe 72%, #9333ea 100%);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 28px var(--accent-glow), inset 0 0 22px rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .crystal-orb:hover {
+            transform: scale(1.06);
+        }
+
+        .corn-stage {
+            position: relative;
+            min-height: 112px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255, 240, 249, 0.88), rgba(243, 232, 255, 0.88));
+            border: 1.5px dashed var(--accent-lavender);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .pop-kernel {
+            position: absolute;
+            bottom: 4px;
+            pointer-events: none;
+            animation: kernelRise 1.05s ease-out forwards;
+        }
+
+        @keyframes kernelRise {
+            0% {
+                transform: translate(0, 0) scale(0.7) rotate(0deg);
+                opacity: 1;
+            }
+            65% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--drift-x, 16px), -86px) scale(1.25) rotate(140deg);
+                opacity: 0;
+            }
+        }
+
+        /* =====================================================================
+           5. STRICT PREMIUM GATE & NON-BLOCKING MODALS
+           ===================================================================== */
+        body.sanctuary-locked #sanctuary-main-content {
+            filter: blur(5px) grayscale(0.15);
+            pointer-events: none !important;
+            user-select: none;
+            opacity: 0.42;
+        }
+
+        #premium-gate-card {
+            display: none;
+        }
+
+        body.sanctuary-locked #premium-gate-card {
+            display: block;
+            position: relative;
+            z-index: 20;
+            pointer-events: auto;
+        }
+
+        .sanctuary-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            pointer-events: none;
+            background: rgba(45, 14, 58, 0.48);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .sanctuary-modal.is-open {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .sanctuary-modal-panel {
+            width: 100%;
+            max-width: 620px;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        #toast-banner {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(16px);
+            z-index: 80;
+            pointer-events: none;
+            opacity: 0;
+            padding: 9px 18px;
+            border-radius: 9999px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-lavender));
+            box-shadow: 0 10px 26px rgba(59, 19, 72, 0.35);
+            transition: opacity 0.22s ease, transform 0.22s ease;
+            white-space: nowrap;
+        }
+
+        #toast-banner.is-visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Non-blocking ambient bokeh and sparkle layers -->
+    <div class="bokeh-backdrop" aria-hidden="true">
+        <div class="bokeh-orb orb-a"></div>
+        <div class="bokeh-orb orb-b"></div>
+        <div class="bokeh-orb orb-c"></div>
+    </div>
+    <canvas id="glitter-canvas" aria-hidden="true"></canvas>
+
+    <div id="app-shell" class="max-w-5xl mx-auto px-3 sm:px-6 py-5 space-y-5">
+        <!-- =================================================================
+             HEADER, PAGE NAVIGATION & AURA COLOR CONTROLS
+             ================================================================= -->
+        <header class="sanctuary-card p-4 sm:p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                    <div class="font-mono-trim">PINK &amp; LAVENDER GLITTER DREAMSCAPE</div>
+                    <h1 class="font-display-trim text-2xl sm:text-3xl mt-0.5">Starlight Sanctuary</h1>
+                    <p class="font-italic-trim text-sm mt-0.5">Soft lilac twilight, rose quartz shimmer, and gentle stardust</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <span id="status-badge" class="pill-btn cursor-default">Locked</span>
+                    <button type="button" data-action="switch-page" data-page="page1" id="nav-page1" class="pill-btn is-active">
+                        Sanctuary Home
+                    </button>
+                    <button type="button" data-action="switch-page" data-page="page2" id="nav-page2" class="pill-btn">
+                        Saved Selections (Page 2)
+                    </button>
+                    <button type="button" data-action="sprinkle-burst" class="glitter-action-btn">
+                        Sparkle Shower
+                    </button>
+                    <button type="button" data-action="lock-vip" id="btn-lock-vip" class="pill-btn" style="display:none;">
+                        Lock Sanctuary
+                    </button>
+                </div>
+            </div>
+
+            <!-- Aura & Sparkle Tint Bar -->
+            <div class="pt-3 border-t border-pink-200/70 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="font-mono-trim mr-1">AURA:</span>
+                    <button type="button" data-action="set-aura" data-aura="pink-lavender" class="pill-btn is-active">Pink &amp; Lavender</button>
+                    <button type="button" data-action="set-aura" data-aura="rose-quartz" class="pill-btn">Rose Quartz</button>
+                    <button type="button" data-action="set-aura" data-aura="lilac-mist" class="pill-btn">Lilac Mist</button>
+                    <button type="button" data-action="set-aura" data-aura="orchid-twilight" class="pill-btn">Orchid Twilight</button>
+                    <button type="button" data-action="set-aura" data-aura="royal-vip" class="pill-btn">Royal Starlight VIP</button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <label for="custom-tint-picker" class="font-mono-trim">CUSTOM TINT</label>
+                    <input type="color" id="custom-tint-picker" value="#e83e9c" class="w-8 h-8 rounded-full cursor-pointer border border-pink-300 bg-transparent" />
+                    <button type="button" data-action="reset-palette" class="pill-btn">Reset Palette</button>
+                    <span id="active-aura-label" class="font-mono-trim">Pink &amp; Lavender Dream</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- =================================================================
+             STRICT PREMIUM GATE (PLAYSTATION / UPI / CARD & VIP CODE)
+             ================================================================= -->
+        <section id="premium-gate-card" class="sanctuary-card p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="font-mono-trim">STARLIGHT VIP ACCESS</div>
+                    <h2 class="font-display-trim text-xl sm:text-2xl">Unlock Starlight Sanctuary</h2>
+                    <p class="font-italic-trim text-sm">Complete payment or enter your VIP Access Code to unlock all sanctuary tools and saved selections</p>
+                </div>
+                <span id="gate-price-badge" class="pill-btn is-active cursor-default">₹99 / $1.99 Lifetime VIP</span>
+            </div>
+
+            <!-- Payment Method Tabs -->
+            <div class="flex flex-wrap gap-2">
+                <button type="button" data-action="set-pay-tab" data-tab="upi" id="tab-upi" class="pill-btn is-active">
+                    UPI &amp; QR Pay
+                </button>
+                <button type="button" data-action="set-pay-tab" data-tab="card" id="tab-card" class="pill-btn">
+                    Card / VIP Access Code
+                </button>
+            </div>
+
+            <!-- Tab 1: UPI & QR Pay -->
+            <div id="panel-upi" class="p-4 rounded-2xl bg-white/80 border border-pink-200 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                <div class="flex flex-col items-center justify-center p-3 rounded-xl bg-purple-50/90 border border-purple-200">
+                    <img id="upi-custom-qr-img" src="" alt="Custom Payment QR" class="w-28 h-28 object-contain rounded-lg" style="display:none;" />
+                    <div id="upi-default-qr-svg"></div>
+                    <span class="font-mono-trim mt-1.5">SCAN TO PAY</span>
+                </div>
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-xl bg-pink-50/80 border border-pink-200">
+                        <div>
+                            <div class="font-mono-trim">UPI ID</div>
+                            <div id="upi-id-display" class="text-sm font-medium">starlight@upi</div>
+                        </div>
+                        <button type="button" data-action="copy-upi-id" class="pill-btn">Copy UPI ID</button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input id="upi-utr-input" type="text" placeholder="Enter UPI UTR / Transaction Reference" class="dream-input" />
+                        <button type="button" data-action="unlock-upi" class="glitter-action-btn shrink-0">
+                            Verify UPI &amp; Unlock
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Card / VIP Access Code -->
+            <div id="panel-card" class="p-4 rounded-2xl bg-white/80 border border-pink-200 space-y-3" style="display:none;">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span id="card-gateway-label" class="text-sm font-medium">Instant Card / VIP Access Code</span>
+                    <button type="button" data-action="card-info" class="pill-btn">Card Checkout Info</button>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input id="vip-code-input" type="text" placeholder="Enter VIP Access Code (e.g. STAR2026)" class="dream-input" />
+                    <button type="button" data-action="unlock-vip-code" class="glitter-action-btn shrink-0">
+                        Unlock VIP Access
+                    </button>
+                </div>
+            </div>
+
+            <div id="gate-feedback" class="text-sm font-medium text-pink-700 min-h-[20px]"></div>
+        </section>
+
+        <!-- =================================================================
+             MAIN SANCTUARY CONTENT (LOCKED UNTIL PREMIUM UNLOCKED)
+             ================================================================= -->
+        <main id="sanctuary-main-content" class="space-y-5">
+            <!-- Section Filter Bar -->
+            <nav class="sanctuary-card p-3 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <button type="button" data-action="filter-section" data-filter="all" class="pill-btn is-active">All Sections</button>
+                    <button type="button" data-action="filter-section" data-filter="music-emoji" class="pill-btn">Soundscape &amp; Emojis</button>
+                    <button type="button" data-action="filter-section" data-filter="wishes-jar" class="pill-btn">Wishes, Jar &amp; Oracle</button>
+                    <button type="button" data-action="filter-section" data-filter="notes-gallery" class="pill-btn">Notes &amp; Gallery</button>
+                    <button type="button" data-action="filter-section" data-filter="corn-bar" class="pill-btn">Corn &amp; Popcorn Bar</button>
+                    <button type="button" data-action="filter-section" data-filter="staff-roster" class="pill-btn">Ensemble Roster</button>
+                </div>
+                <span class="font-mono-trim">SPARKLES: <strong id="sparkle-counter">0</strong></span>
+            </nav>
+
+            <!-- PAGE 1: INTERACTIVE SANCTUARY -->
+            <div id="page1-view" class="space-y-5">
+                <!-- Row 1: Web Audio Soundscape & Sparkle Emoji Tray -->
+                <section id="sec-music-emoji" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <article class="sanctuary-card p-5 space-y-3.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <div>
+                                <div class="font-mono-trim">WEB AUDIO SYNTHESIZER</div>
+                                <h2 class="font-display-trim text-lg">Starlight Soundscape</h2>
+                            </div>
+                            <button type="button" data-action="toggle-audio" id="btn-toggle-audio" class="glitter-action-btn">
+                                Play Chimes
+                            </button>
+                        </div>
+                        <p class="font-italic-trim text-sm">Gentle harmonic bells and soft starlight arpeggios</p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button type="button" data-action="select-sound" data-sound="lavender-lullaby" class="pill-btn is-active">Lavender Lullaby</button>
+                            <button type="button" data-action="select-sound" data-sound="rose-quartz-chimes" class="pill-btn">Rose Quartz Chimes</button>
+                            <button type="button" data-action="select-sound" data-sound="starlight-harp" class="pill-btn">Starlight Harp</button>
+                            <button type="button" data-action="select-sound" data-sound="velvet-twilight" class="pill-btn">Velvet Twilight</button>
+                        </div>
+                        <div class="flex items-center gap-3 pt-1">
+                            <span class="font-mono-trim">VOLUME</span>
+                            <input id="audio-volume-slider" type="range" min="0" max="100" value="45" class="w-full accent-pink-500 cursor-pointer" />
+                            <span id="audio-volume-label" class="font-mono-trim">45%</span>
+                        </div>
+                    </article>
+
+                    <article class="sanctuary-card p-5 space-y-3.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <div>
+                                <div class="font-mono-trim">COLLECT &amp; INSERT</div>
+                                <h2 class="font-display-trim text-lg">Sparkle Emoji Tray</h2>
+                            </div>
+                            <button type="button" data-action="clear-emojis" class="pill-btn">Clear Tray</button>
+                        </div>
+                        <p class="font-italic-trim text-sm">Tap an emoji to collect it and insert into your note</p>
+                        <div id="emoji-palette" class="grid grid-cols-8 gap-1.5"></div>
+                        <div class="pt-1">
+                            <div class="font-mono-trim mb-1.5">SAVED EMOJI FAVORITES (<span id="emoji-saved-count">0</span>)</div>
+                            <div id="emoji-saved-tray" class="flex flex-wrap gap-1.5 min-h-[30px]"></div>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Row 2: Daily Wishes, Stardust Jar & Dream Oracle -->
+                <section id="sec-wishes-jar" class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <!-- Daily Wishes -->
+                    <article class="sanctuary-card p-5 space-y-3">
+                        <div class="font-mono-trim">INTENTIONS</div>
+                        <h2 class="font-display-trim text-lg">Daily Wishes</h2>
+                        <form id="wish-form" class="flex gap-2">
+                            <input id="wish-input" type="text" placeholder="Write a dreamy wish for today" class="dream-input" />
+                            <button type="submit" class="glitter-action-btn shrink-0">Add</button>
+                        </form>
+                        <ul id="wish-list" class="space-y-2 max-h-60 overflow-y-auto pr-1"></ul>
+                    </article>
+
+                    <!-- Stardust Jar -->
+                    <article class="sanctuary-card p-5 flex flex-col items-center justify-between text-center space-y-3">
+                        <div>
+                            <div class="font-mono-trim">LUMINESCENCE</div>
+                            <h2 class="font-display-trim text-lg">Stardust Jar</h2>
+                            <p class="font-italic-trim text-xs">Fills from wishes, notes, corn treats, and photos</p>
+                        </div>
+
+                        <div id="stardust-jar" data-action="tap-jar" class="jar-vessel" title="Tap jar to add stardust or trigger supernova at 100%">
+                            <div id="stardust-liquid" class="jar-liquid"></div>
+                        </div>
+
+                        <div class="space-y-2 w-full">
+                            <div id="jar-luminescence-label" class="font-mono-trim">0% LUMINESCENCE</div>
+                            <button type="button" data-action="add-stardust" class="glitter-action-btn w-full">
+                                + Add Stardust
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- The Dream Oracle -->
+                    <article class="sanctuary-card p-5 flex flex-col items-center justify-between text-center space-y-3">
+                        <div>
+                            <div class="font-mono-trim">CELESTIAL GUIDANCE</div>
+                            <h2 class="font-display-trim text-lg">The Dream Oracle</h2>
+                            <p class="font-italic-trim text-xs">Tap the crystal ball for a gentle reflection</p>
+                        </div>
+
+                        <div id="oracle-orb" data-action="ask-oracle" class="crystal-orb" role="button" tabindex="0" aria-label="Ask The Dream Oracle">
+                            ✦
+                        </div>
+
+                        <div class="space-y-2.5 w-full">
+                            <p id="oracle-reflection" class="font-italic-trim text-sm min-h-[42px] flex items-center justify-center">
+                                Pink rose clouds and soft lavender starlight surround your dreams with peace
+                            </p>
+                            <button type="button" data-action="ask-oracle" class="glitter-action-btn w-full">
+                                Ask The Dream Oracle
+                            </button>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Row 3: Starlight Notes & Starlight Gallery -->
+                <section id="sec-notes-gallery" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <!-- Starlight Notes -->
+                    <article class="sanctuary-card p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-mono-trim">JOURNAL</div>
+                                <h2 class="font-display-trim text-lg">Starlight Notes</h2>
+                            </div>
+                            <span id="notes-count-badge" class="pill-btn cursor-default">0 Notes</span>
+                        </div>
+                        <input id="note-title-input" type="text" placeholder="Note title (optional)" class="dream-input" />
+                        <textarea id="note-body-input" rows="3" placeholder="Write a gentle thought or memory" class="dream-input"></textarea>
+                        <div class="flex items-center justify-between gap-2">
+                            <span id="note-feedback" class="font-italic-trim text-xs"></span>
+                            <button type="button" data-action="save-note" class="glitter-action-btn">Save Note</button>
+                        </div>
+                        <div id="notes-list" class="space-y-2 max-h-52 overflow-y-auto pt-1"></div>
+                    </article>
+
+                    <!-- Starlight Gallery -->
+                    <article class="sanctuary-card p-5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="font-mono-trim">KEEPSAKES</div>
+                                <h2 class="font-display-trim text-lg">Starlight Gallery</h2>
+                            </div>
+                            <span id="gallery-count-badge" class="pill-btn cursor-default">0 Photos</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <input id="gallery-file-input" type="file" accept="image/*" class="hidden" />
+                            <button type="button" data-action="choose-gallery-file" class="pill-btn">Upload Image File</button>
+                            <input id="gallery-url-input" type="url" placeholder="Or paste image URL" class="dream-input flex-1 min-w-[160px]" />
+                        </div>
+                        <div class="flex gap-2">
+                            <input id="gallery-caption-input" type="text" placeholder="Photo caption" class="dream-input" />
+                            <button type="button" data-action="save-photo" class="glitter-action-btn shrink-0">Save Photo</button>
+                        </div>
+                        <div id="gallery-feedback" class="font-italic-trim text-xs"></div>
+                        <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1"></div>
+                    </article>
+                </section>
+
+                <!-- Row 4: Starlight Corn & Popcorn Bar -->
+                <section id="sec-corn-bar" class="sanctuary-card p-5 space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <div class="font-mono-trim">WARM TREATS &amp; SPARKLE POP</div>
+                            <h2 class="font-display-trim text-xl">Starlight Corn &amp; Popcorn Bar</h2>
+                        </div>
+                        <span id="corn-count-badge" class="pill-btn cursor-default">0 Treats Popped</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-1.5">
+                        <button type="button" data-action="select-corn-flavor" data-flavor="Rose Strawberry Glaze" class="pill-btn is-active">Rose Strawberry Glaze</button>
+                        <button type="button" data-action="select-corn-flavor" data-flavor="Lavender Honey Butter" class="pill-btn">Lavender Honey Butter</button>
+                        <button type="button" data-action="select-corn-flavor" data-flavor="Lilac Sugar Dust" class="pill-btn">Lilac Sugar Dust</button>
+                        <button type="button" data-action="select-corn-flavor" data-flavor="Velvet Sea Salt Corn" class="pill-btn">Velvet Sea Salt Corn</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                        <div id="corn-kettle-stage" class="corn-stage md:col-span-2">
+                            <div class="text-center">
+                                <div id="corn-active-flavor" class="font-display-trim text-base">Rose Strawberry Glaze</div>
+                                <div class="font-italic-trim text-xs mt-0.5">Pop fresh corn kernels with pink and lavender sparkles</div>
+                            </div>
+                        </div>
+                        <div class="space-y-2.5">
+                            <button type="button" data-action="pop-corn" class="glitter-action-btn w-full">
+                                Pop Fresh Corn
+                            </button>
+                            <div id="corn-recent-list" class="space-y-1 max-h-24 overflow-y-auto text-xs"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Row 5: 6-Member Starlight Ensemble & Staff Roster -->
+                <section id="sec-staff-roster" class="sanctuary-card p-5 space-y-3.5">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <div class="font-mono-trim">SANCTUARY HOSTS</div>
+                            <h2 class="font-display-trim text-xl">Starlight Ensemble &amp; Staff Roster</h2>
+                        </div>
+                        <span id="staff-on-shift-badge" class="pill-btn cursor-default">0 On Shift</span>
+                    </div>
+                    <div id="staff-roster-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+                </section>
+            </div>
+
+            <!-- PAGE 2: SAVED SELECTIONS -->
+            <section id="page2-view" class="space-y-5" style="display:none;">
+                <div class="sanctuary-card p-5 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <div class="font-mono-trim">CURATED ARCHIVE</div>
+                        <h2 class="font-display-trim text-2xl">Saved Selections — Page 2</h2>
+                        <p class="font-italic-trim text-sm">Review and manage your saved wishes, emojis, notes, photos, and corn treats</p>
+                    </div>
+                    <button type="button" data-action="switch-page" data-page="page1" class="glitter-action-btn">
+                        Back to Sanctuary Home
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="sanctuary-card p-5 space-y-2.5">
+                        <h3 class="font-display-trim text-lg">Saved Wishes &amp; Emojis</h3>
+                        <div id="page2-emojis" class="flex flex-wrap gap-1.5"></div>
+                        <ul id="page2-wishes" class="space-y-1.5 text-sm pt-1"></ul>
+                    </div>
+
+                    <div class="sanctuary-card p-5 space-y-2.5">
+                        <h3 class="font-display-trim text-lg">Saved Starlight Notes</h3>
+                        <div id="page2-notes" class="space-y-2 text-sm"></div>
+                    </div>
+
+                    <div class="sanctuary-card p-5 space-y-2.5">
+                        <h3 class="font-display-trim text-lg">Saved Gallery Photos</h3>
+                        <div id="page2-photos" class="grid grid-cols-2 gap-2.5"></div>
+                    </div>
+
+                    <div class="sanctuary-card p-5 space-y-2.5">
+                        <h3 class="font-display-trim text-lg">Saved Corn Treats &amp; Active Shifts</h3>
+                        <div id="page2-corn" class="space-y-1.5 text-sm"></div>
+                        <div id="page2-shifts" class="font-mono-trim pt-2 border-t border-pink-200/70"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- =====================================================================
+         SEPARATE PRIVATE ADMIN STUDIO MODAL (#admin-portal / ?admin=1 / openAdminPortal())
+         ===================================================================== -->
+    <div id="private-admin-modal" class="sanctuary-modal" role="dialog" aria-modal="true" aria-label="Private Admin Studio">
+        <div class="sanctuary-card sanctuary-modal-panel space-y-4">
+            <div class="flex items-center justify-between gap-2">
+                <div>
+                    <div class="font-mono-trim">SEPARATE OWNER ACCESS</div>
+                    <h2 class="font-display-trim text-xl">Private Admin Studio</h2>
+                </div>
+                <button type="button" data-action="close-modals" class="pill-btn">Close</button>
+            </div>
+
+            <div id="admin-auth-box" class="p-4 rounded-2xl bg-white/85 border border-pink-200 space-y-3">
+                <p class="text-sm">Enter your private admin password to configure UPI ID, custom QR image, price, and VIP access code.</p>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input id="admin-password-input" type="password" placeholder="Admin password" class="dream-input" />
+                    <button type="button" data-action="unlock-admin-studio" class="glitter-action-btn shrink-0">Unlock Studio</button>
+                </div>
+                <div id="admin-auth-error" class="text-sm font-medium text-pink-700"></div>
+            </div>
+
+            <div id="admin-settings-box" class="space-y-3" style="display:none;">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label for="cfg-price" class="font-mono-trim block mb-1">PREMIUM PRICE LABEL</label>
+                        <input id="cfg-price" type="text" class="dream-input" />
+                    </div>
+                    <div>
+                        <label for="cfg-vip-code" class="font-mono-trim block mb-1">VIP ACCESS CODE</label>
+                        <input id="cfg-vip-code" type="text" class="dream-input" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label for="cfg-qr-url" class="font-mono-trim block mb-1">CUSTOM QR IMAGE URL</label>
+                        <input id="cfg-qr-url" type="url" placeholder="https://..." class="dream-input" />
+                    </div>
+                    <div>
+                        <label for="cfg-qr-file" class="font-mono-trim block mb-1">OR UPLOAD QR IMAGE</label>
+                        <input id="cfg-qr-file" type="file" accept="image/*" class="text-xs mt-1.5" />
+                    </div>
+                </div>
+
+                <div>
+                    <label for="cfg-new-pass" class="font-mono-trim block mb-1">NEW ADMIN PASSWORD (OPTIONAL)</label>
+                    <input id="cfg-new-pass" type="password" placeholder="Leave blank to keep current password" class="dream-input" />
+                </div>
+
+                <div class="flex items-center justify-between gap-2 pt-2">
+                    <span id="admin-save-status" class="text-sm font-medium text-purple-800"></span>
+                    <button type="button" data-action="save-admin-config" class="glitter-action-btn">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         GALLERY LIGHTBOX MODAL
+         ===================================================================== -->
+    <div id="lightbox-modal" class="sanctuary-modal" role="dialog" aria-modal="true" aria-label="Gallery Preview">
+        <div class="sanctuary-card sanctuary-modal-panel text-center space-y-3">
+            <div class="flex justify-end">
+                <button type="button" data-action="close-modals" class="pill-btn">Close</button>
+            </div>
+            <img id="lightbox-image" src="" alt="Gallery Keepsake" class="max-h-[60vh] mx-auto rounded-2xl border-2 border-white shadow-md" />
+            <p id="lightbox-caption" class="font-italic-trim text-sm"></p>
+        </div>
+    </div>
+
+    <div id="toast-banner" role="status" aria-live="polite"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            "use strict";
+
+            /* =================================================================
+               1. CONFIGURATION, PALETTES & PERSISTENT STATE
+               ================================================================= */
+            const STORAGE_KEY = "starlight_sanctuary_complete_v1";
+
+            const AURA_THEMES = {
+                "pink-lavender": {
+                    name: "Pink & Lavender Dream",
+                    bg: "linear-gradient(135deg, #ffd6ec 0%, #f4a8d8 36%, #e4c6ff 72%, #d8b4fe 100%)",
+                    pink: "#e83e9c",
+                    lavender: "#9b51e0",
+                    glow: "rgba(232, 62, 156, 0.28)",
+                    orb1: "rgba(244, 114, 182, 0.45)",
+                    orb2: "rgba(192, 132, 252, 0.45)",
+                    orb3: "rgba(251, 207, 232, 0.58)",
+                    sparks: ["#ff4da6", "#ff85c2", "#c084fc", "#e9d5ff", "#ffffff"]
+                },
+                "rose-quartz": {
+                    name: "Rose Quartz Glow",
+                    bg: "linear-gradient(135deg, #ffc2df 0%, #ff77bc 40%, #ffd9ec 74%, #f0abfc 100%)",
+                    pink: "#ff248e",
+                    lavender: "#c026d3",
+                    glow: "rgba(255, 36, 142, 0.30)",
+                    orb1: "rgba(255, 77, 166, 0.50)",
+                    orb2: "rgba(232, 121, 249, 0.42)",
+                    orb3: "rgba(255, 228, 242, 0.62)",
+                    sparks: ["#ff248e", "#ff70b8", "#f0abfc", "#ffffff"]
+                },
+                "lilac-mist": {
+                    name: "Lilac Mist",
+                    bg: "linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 38%, #e9d5ff 72%, #fbcfe8 100%)",
+                    pink: "#d946ef",
+                    lavender: "#7c3aed",
+                    glow: "rgba(124, 58, 237, 0.26)",
+                    orb1: "rgba(167, 139, 250, 0.50)",
+                    orb2: "rgba(192, 132, 252, 0.48)",
+                    orb3: "rgba(251, 207, 232, 0.52)",
+                    sparks: ["#a78bfa", "#c084fc", "#fbcfe8", "#ffffff"]
+                },
+                "orchid-twilight": {
+                    name: "Orchid Twilight",
+                    bg: "linear-gradient(135deg, #f5d0fe 0%, #e879f9 36%, #c084fc 72%, #9333ea 100%)",
+                    pink: "#db2777",
+                    lavender: "#9333ea",
+                    glow: "rgba(147, 51, 234, 0.32)",
+                    orb1: "rgba(232, 121, 249, 0.48)",
+                    orb2: "rgba(147, 51, 234, 0.44)",
+                    orb3: "rgba(245, 208, 254, 0.54)",
+                    sparks: ["#e879f9", "#c084fc", "#f5d0fe", "#ffffff"]
+                },
+                "royal-vip": {
+                    name: "Royal Starlight VIP",
+                    bg: "linear-gradient(135deg, #ffe4f5 0%, #f472b6 32%, #c084fc 68%, #7e22ce 100%)",
+                    pink: "#ff1e8a",
+                    lavender: "#7e22ce",
+                    glow: "rgba(255, 30, 138, 0.34)",
+                    orb1: "rgba(255, 30, 138, 0.50)",
+                    orb2: "rgba(126, 34, 206, 0.46)",
+                    orb3: "rgba(253, 224, 71, 0.34)",
+                    sparks: ["#ff1e8a", "#c084fc", "#fde047", "#ffffff"]
+                }
+            };
+
+            const SOUNDSCAPES = {
+                "lavender-lullaby": { name: "Lavender Lullaby", notes: [523.25, 659.25, 783.99, 987.77], type: "sine", stepMs: 520 },
+                "rose-quartz-chimes": { name: "Rose Quartz Chimes", notes: [587.33, 739.99, 880.00, 1174.66], type: "triangle", stepMs: 440 },
+                "starlight-harp": { name: "Starlight Harp", notes: [440.00, 554.37, 659.25, 880.00], type: "sine", stepMs: 480 },
+                "velvet-twilight": { name: "Velvet Twilight", notes: [392.00, 493.88, 587.33, 783.99], type: "sine", stepMs: 650 }
+            };
+
+            const EMOJI_CHOICES = [
+                "🌸", "💜", "✨", "💖", "🦋", "🌙", "🎀", "🌷",
+                "🦄", "⭐", "🍓", "💫", "🧁", "🕊️", "🔮", "🌺"
+            ];
+
+            const ORACLE_REFLECTIONS = [
+                "Pink rose clouds and soft lavender starlight surround your dreams with peace",
+                "Every glittering wish you hold today is blooming gently across the cosmos",
+                "Sweet lilac twilight reminds you to move softly and shine brightly",
+                "Sparkles follow wherever your gentle heart and joyful spirit wander",
+                "A burst of cotton candy magic is lining up something lovely for you"
+            ];
+
+            const ENSEMBLE_STAFF = [
+                { id: "lumina", name: "Lumina", role: "Aurora & Starlight Keeper" },
+                { id: "velour", name: "Velour", role: "Lullaby & Chime Weaver" },
+                { id: "celeste", name: "Celeste", role: "Dream Oracle Guardian" },
+                { id: "pippa", name: "Pippa", role: "Gallery & Petal Archivist" },
+                { id: "solis", name: "Solis", role: "Stardust Jar Alchemist" },
+                { id: "oriole", name: "Oriole", role: "Corn Bar & Note Host" }
+            ];
+
+            function stripQuotes(text) {
+                if (typeof text !== "string") return "";
+                return text.replace(/[\u201C\u201D\u2018\u2019"']/g, "");
+            }
+
+            function readSavedState() {
+                try {
+                    const raw = window.localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (err) {
+                    return null;
+                }
+            }
+
+            function writeSavedState(data) {
+                try {
+                    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                } catch (err) {
+                    // Ignore storage quota or sandbox errors
+                }
+            }
+
+            const persisted = readSavedState() || {};
+            const state = {
+                isUnlocked: Boolean(persisted.isUnlocked),
+                unlockSource: persisted.unlockSource || "",
+                payTab: persisted.payTab === "card" ? "card" : "upi",
+                page: persisted.page === "page2" ? "page2" : "page1",
+                sectionFilter: "all",
+                aura: AURA_THEMES[persisted.aura] ? persisted.aura : "pink-lavender",
+                customTint: typeof persisted.customTint === "string" ? persisted.customTint : "",
+                sound: SOUNDSCAPES[persisted.sound] ? persisted.sound : "lavender-lullaby",
+                volume: typeof persisted.volume === "number" ? persisted.volume : 45,
+                emojis: Array.isArray(persisted.emojis) ? persisted.emojis : [],
+                wishes: Array.isArray(persisted.wishes) ? persisted.wishes : [
+                    { id: "w-1", text: "Sip a warm lavender rose drink and relax", done: false },
+                    { id: "w-2", text: "Collect sparkling emojis and write a note", done: false },
+                    { id: "w-3", text: "Pop sweet rose corn and save a photo", done: false }
+                ],
+                jar: typeof persisted.jar === "number" ? Math.max(0, Math.min(100, persisted.jar)) : 20,
+                notes: Array.isArray(persisted.notes) ? persisted.notes : [],
+                photos: Array.isArray(persisted.photos) ? persisted.photos : [],
+                cornFlavor: persisted.cornFlavor || "Rose Strawberry Glaze",
+                cornTreats: Array.isArray(persisted.cornTreats) ? persisted.cornTreats : [],
+                shifts: persisted.shifts && typeof persisted.shifts === "object"
+                    ? persisted.shifts
+                    : { lumina: true, velour: true, celeste: true, pippa: false, solis: true, oriole: false },
+                adminPass: persisted.adminPass || "admin123",
+                priceLabel: persisted.priceLabel || "₹99 / $1.99 Lifetime VIP",
+                upiId: persisted.upiId || "starlight@upi",
+                customQr: persisted.customQr || "",
+                gatewayLabel: persisted.gatewayLabel || "Instant Card / VIP Access Code",
+                vipCode: persisted.vipCode || "STAR2026"
+            };
+
+            let sparkleCount = 0;
+            let oracleIdx = 0;
+            let uploadedPhotoData = "";
+            let uploadedQrData = "";
+
+            function persistState() {
+                writeSavedState(state);
+            }
+
+            let toastTimer = null;
+            function showToast(msg) {
+                const banner = document.getElementById("toast-banner");
+                if (!banner) return;
+                banner.textContent = stripQuotes(msg);
+                banner.classList.add("is-visible");
+                window.clearTimeout(toastTimer);
+                toastTimer = window.setTimeout(function () {
+                    banner.classList.remove("is-visible");
+                }, 2600);
+            }
+
+            /* =================================================================
+               2. CONTINUOUS & INTERACTIVE SPARKLE / GLITTER CANVAS
+               ================================================================= */
+            const canvas = document.getElementById("glitter-canvas");
+            const ctx = canvas ? canvas.getContext("2d") : null;
+            const particles = [];
+            const shootingStars = [];
+
+            function resizeGlitterCanvas() {
+                if (!canvas || !ctx) return;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const w = window.innerWidth;
+                const h = window.innerHeight;
+                canvas.width = Math.floor(w * dpr);
+                canvas.height = Math.floor(h * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            function getSparklePalette() {
+                const base = (AURA_THEMES[state.aura] || AURA_THEMES["pink-lavender"]).sparks.slice();
+                if (state.customTint) {
+                    base.unshift(state.customTint);
+                }
+                return base;
+            }
+
+            function incrementSparkleCounter(n) {
+                sparkleCount += n;
+                const el = document.getElementById("sparkle-counter");
+                if (el) el.textContent = String(sparkleCount);
+            }
+
+            function spawnSparkle(x, y, opts) {
+                const palette = getSparklePalette();
+                const options = opts || {};
+                const angle = options.angle !== undefined ? options.angle : Math.random() * Math.PI * 2;
+                const speed = options.speed !== undefined ? options.speed : (0.4 + Math.random() * 2.2);
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed - (options.upward ? 0.5 : 0),
+                    size: options.size || (3 + Math.random() * 6.5),
+                    alpha: 1,
+                    decay: options.decay || (0.012 + Math.random() * 0.016),
+                    color: palette[Math.floor(Math.random() * palette.length)],
+                    isDiamond: options.isDiamond !== undefined ? options.isDiamond : Math.random() < 0.65,
+                    rot: Math.random() * Math.PI,
+                    vRot: (Math.random() - 0.5) * 0.08
+                });
+                incrementSparkleCounter(1);
+            }
+
+            function spawnSparkleBurst(x, y, count) {
+                const total = count || 24;
+                for (let i = 0; i < total; i++) {
+                    const angle = (Math.PI * 2 * i) / total + (Math.random() - 0.5) * 0.35;
+                    spawnSparkle(x, y, {
+                        angle: angle,
+                        speed: 1.1 + Math.random() * 3.1,
+                        size: 4 + Math.random() * 7.5,
+                        decay: 0.014 + Math.random() * 0.014,
+                        isDiamond: i % 2 === 0
+                    });
+                }
+                if (shootingStars.length < 3) {
+                    shootingStars.push({
+                        x: x - 40,
+                        y: y - 30,
+                        vx: 5.5 + Math.random() * 3,
+                        vy: 2.2 + Math.random() * 1.8,
+                        alpha: 1
+                    });
+                }
+            }
+
+            function spawnAmbientSparkle() {
+                spawnSparkle(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight,
+                    {
+                        speed: 0.15 + Math.random() * 0.55,
+                        size: 2.5 + Math.random() * 5,
+                        decay: 0.007 + Math.random() * 0.01,
+                        isDiamond: Math.random() < 0.72,
+                        upward: true
+                    }
+                );
+            }
+
+            function drawFourPointDiamond(context, x, y, radius, rotation, color, alpha) {
+                context.save();
+                context.translate(x, y);
+                context.rotate(rotation);
+                context.globalAlpha = Math.max(0, Math.min(1, alpha));
+                context.fillStyle = color;
+                context.shadowColor = color;
+                context.shadowBlur = 10;
+
+                const inner = radius * 0.26;
+                context.beginPath();
+                context.moveTo(0, -radius);
+                context.quadraticCurveTo(inner, -inner, radius, 0);
+                context.quadraticCurveTo(inner, inner, 0, radius);
+                context.quadraticCurveTo(-inner, inner, -radius, 0);
+                context.quadraticCurveTo(-inner, -inner, 0, -radius);
+                context.closePath();
+                context.fill();
+                context.restore();
+            }
+
+            function renderGlitterFrame() {
+                if (!ctx || !canvas) return;
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.985;
+                    p.vy *= 0.985;
+                    p.rot += p.vRot;
+                    p.alpha -= p.decay;
+
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+
+                    if (p.isDiamond) {
+                        drawFourPointDiamond(ctx, p.x, p.y, p.size, p.rot, p.color, p.alpha);
+                    } else {
+                        ctx.save();
+                        ctx.globalAlpha = Math.max(0, p.alpha);
+                        ctx.fillStyle = p.color;
+                        ctx.shadowColor = p.color;
+                        ctx.shadowBlur = 8;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size * 0.45, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let j = shootingStars.length - 1; j >= 0; j--) {
+                    const s = shootingStars[j];
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.alpha -= 0.025;
+                    if (s.alpha <= 0) {
+                        shootingStars.splice(j, 1);
+                        continue;
+                    }
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, s.alpha);
+                    ctx.strokeStyle = "#ffffff";
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(s.x, s.y);
+                    ctx.lineTo(s.x - s.vx * 5, s.y - s.vy * 5);
+                    ctx.stroke();
+                    drawFourPointDiamond(ctx, s.x, s.y, 7, 0.4, "#ff85c2", s.alpha);
+                    ctx.restore();
+                }
+
+                window.requestAnimationFrame(renderGlitterFrame);
+            }
+
+            let lastMoveSparkle = 0;
+            document.addEventListener("pointermove", function (ev) {
+                const now = Date.now();
+                if (now - lastMoveSparkle < 42) return;
+                lastMoveSparkle = now;
+                spawnSparkle(ev.clientX, ev.clientY, {
+                    speed: 0.5 + Math.random() * 1.4,
+                    size: 3.5 + Math.random() * 5,
+                    decay: 0.022,
+                    isDiamond: true
+                });
+            });
+
+            /* =================================================================
+               3. WEB AUDIO SOUNDSCAPE & CHIME SYNTHESIZER
+               ================================================================= */
+            let audioCtx = null;
+            let soundTimer = null;
+            let noteStep = 0;
+            let isPlayingSound = false;
+
+            function ensureAudioContext() {
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+                if (!AudioConstructor) return null;
+                if (!audioCtx) {
+                    audioCtx = new AudioConstructor();
+                }
+                if (audioCtx.state === "suspended") {
+                    audioCtx.resume().catch(function () {});
+                }
+                return audioCtx;
+            }
+
+            function playChimeNote(freq, waveType, durationSec) {
+                try {
+                    const ctxAudio = ensureAudioContext();
+                    if (!ctxAudio) return;
+                    const gainScale = (state.volume / 100) * 0.14;
+                    if (gainScale <= 0.001) return;
+
+                    const osc = ctxAudio.createOscillator();
+                    const gain = ctxAudio.createGain();
+                    osc.type = waveType || "sine";
+                    osc.frequency.setValueAtTime(freq, ctxAudio.currentTime);
+
+                    gain.gain.setValueAtTime(0.0001, ctxAudio.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(gainScale, ctxAudio.currentTime + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctxAudio.currentTime + (durationSec || 0.45));
+
+                    osc.connect(gain);
+                    gain.connect(ctxAudio.destination);
+                    osc.start();
+                    osc.stop(ctxAudio.currentTime + (durationSec || 0.48));
+                } catch (err) {
+                    // Audio playback blocked or unavailable
+                }
+            }
+
+            function stopSoundscape() {
+                window.clearInterval(soundTimer);
+                soundTimer = null;
+                isPlayingSound = false;
+                const btn = document.getElementById("btn-toggle-audio");
+                if (btn) btn.textContent = "Play Chimes";
+            }
+
+            function startSoundscape() {
+                stopSoundscape();
+                const cfg = SOUNDSCAPES[state.sound] || SOUNDSCAPES["lavender-lullaby"];
+                isPlayingSound = true;
+                const btn = document.getElementById("btn-toggle-audio");
+                if (btn) btn.textContent = "Pause Chimes";
+
+                playChimeNote(cfg.notes[noteStep % cfg.notes.length], cfg.type, 0.5);
+                noteStep++;
+
+                soundTimer = window.setInterval(function () {
+                    const activeCfg = SOUNDSCAPES[state.sound] || SOUNDSCAPES["lavender-lullaby"];
+                    playChimeNote(activeCfg.notes[noteStep % activeCfg.notes.length], activeCfg.type, 0.5);
+                    noteStep++;
+                }, cfg.stepMs);
+            }
+
+            /* =================================================================
+               4. AURA & COLOR PALETTE APPLICATION
+               ================================================================= */
+            function hexToRgba(hex, alpha) {
+                const clean = (hex || "#e83e9c").replace("#", "");
+                if (clean.length !== 6) return "rgba(232, 62, 156, " + alpha + ")";
+                const r = parseInt(clean.slice(0, 2), 16);
+                const g = parseInt(clean.slice(2, 4), 16);
+                const b = parseInt(clean.slice(4, 6), 16);
+                return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+            }
+
+            function applyAuraAndColor() {
+                const theme = AURA_THEMES[state.aura] || AURA_THEMES["pink-lavender"];
+                const rootStyle = document.documentElement.style;
+                const bodyStyle = document.body.style;
+
+                const primaryPink = state.customTint || theme.pink;
+                const secondaryLav = theme.lavender;
+                const bgGrad = state.customTint
+                    ? "linear-gradient(135deg, " + hexToRgba(state.customTint, 0.34) + " 0%, #f5d0fe 45%, " + hexToRgba(secondaryLav, 0.36) + " 100%)"
+                    : theme.bg;
+
+                rootStyle.setProperty("--bg-gradient", bgGrad);
+                rootStyle.setProperty("--accent-pink", primaryPink);
+                rootStyle.setProperty("--accent-lavender", secondaryLav);
+                rootStyle.setProperty("--accent-glow", hexToRgba(primaryPink, 0.28));
+                rootStyle.setProperty("--pill-active-bg", "linear-gradient(135deg, " + primaryPink + " 0%, " + secondaryLav + " 100%)");
+                rootStyle.setProperty("--orb-1", hexToRgba(primaryPink, 0.44));
+                rootStyle.setProperty("--orb-2", hexToRgba(secondaryLav, 0.44));
+                rootStyle.setProperty("--orb-3", theme.orb3);
+
+                bodyStyle.background = bgGrad;
+                bodyStyle.backgroundAttachment = "fixed";
+
+                document.querySelectorAll("[data-action='set-aura']").forEach(function (btn) {
+                    btn.classList.toggle("is-active", btn.getAttribute("data-aura") === state.aura);
+                });
+
+                const labelEl = document.getElementById("active-aura-label");
+                if (labelEl) {
+                    labelEl.textContent = state.customTint
+                        ? (theme.name + " + " + state.customTint.toUpperCase())
+                        : theme.name;
+                }
+
+                const picker = document.getElementById("custom-tint-picker");
+                if (picker && state.customTint) {
+                    picker.value = state.customTint;
+                }
+            }
+
+            /* =================================================================
+               5. QR CODE SVG GENERATOR FOR PLAYSTATION & UPI
+               ================================================================= */
+            function buildQrSvg(seedLabel) {
+                let hash = 0;
+                for (let i = 0; i < seedLabel.length; i++) {
+                    hash = (hash * 31 + seedLabel.charCodeAt(i)) >>> 0;
+                }
+                const cells = 7;
+                const size = 18;
+                let rects = '<rect x="0" y="0" width="' + (cells * size) + '" height="' + (cells * size) + '" rx="8" fill="#ffffff"/>';
+                for (let r = 0; r < cells; r++) {
+                    for (let c = 0; c < cells; c++) {
+                        const isFinder = (r < 2 && c < 2) || (r < 2 && c >= cells - 2) || (r >= cells - 2 && c < 2);
+                        const bit = ((hash >> ((r * cells + c) % 24)) & 1) === 1;
+                        if (isFinder || bit) {
+                            const fill = (r + c) % 2 === 0 ? "#be185d" : "#7e22ce";
+                            rects += '<rect x="' + (c * size + 2) + '" y="' + (r * size + 2) + '" width="' + (size - 4) + '" height="' + (size - 4) + '" rx="3" fill="' + fill + '"/>';
+                        }
+                    }
+                }
+                return '<svg width="112" height="112" viewBox="0 0 ' + (cells * size) + ' ' + (cells * size) + '" aria-hidden="true">' + rects + "</svg>";
+            }
+
+            /* =================================================================
+               6. RENDERERS FOR ALL SANCTUARY FEATURES & PAGE 2
+               ================================================================= */
+            function renderSoundControls() {
+                document.querySelectorAll("[data-action='select-sound']").forEach(function (btn) {
+                    btn.classList.toggle("is-active", btn.getAttribute("data-sound") === state.sound);
+                });
+                const slider = document.getElementById("audio-volume-slider");
+                const vLabel = document.getElementById("audio-volume-label");
+                if (slider) slider.value = String(state.volume);
+                if (vLabel) vLabel.textContent = state.volume + "%";
+            }
+
+            function renderEmojiTray() {
+                const palette = document.getElementById("emoji-palette");
+                if (palette) {
+                    palette.innerHTML = EMOJI_CHOICES.map(function (em) {
+                        return '<button type="button" data-action="pick-emoji" data-emoji="' + em + '" class="pill-btn px-2 py-1.5 text-base">' + em + "</button>";
+                    }).join("");
+                }
+
+                const countEl = document.getElementById("emoji-saved-count");
+                if (countEl) countEl.textContent = String(state.emojis.length);
+
+                const savedTray = document.getElementById("emoji-saved-tray");
+                if (savedTray) {
+                    savedTray.innerHTML = state.emojis.length
+                        ? state.emojis.map(function (em) {
+                            return '<span class="pill-btn px-2.5 py-1 text-sm cursor-default">' + em + "</span>";
+                        }).join("")
+                        : '<span class="font-italic-trim text-xs">No emojis collected yet</span>';
+                }
+            }
+
+            function renderWishes() {
+                const list = document.getElementById("wish-list");
+                if (!list) return;
+                list.innerHTML = state.wishes.map(function (w) {
+                    const doneClass = w.done ? "line-through opacity-65" : "";
+                    const checkLabel = w.done ? "Done" : "Mark";
+                    return (
+                        '<li class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-white/80 border border-pink-200">' +
+                        '<button type="button" data-action="toggle-wish" data-id="' + w.id + '" class="text-left text-sm flex-1 ' + doneClass + '">' +
+                        stripQuotes(w.text) +
+                        "</button>" +
+                        '<button type="button" data-action="toggle-wish" data-id="' + w.id + '" class="pill-btn py-1 px-2.5 text-xs">' + checkLabel + "</button>" +
+                        '<button type="button" data-action="delete-wish" data-id="' + w.id + '" class="pill-btn py-1 px-2 text-xs">✕</button>' +
+                        "</li>"
+                    );
+                }).join("");
+            }
+
+            function bumpStardustJar(delta) {
+                state.jar = Math.max(0, Math.min(100, state.jar + delta));
+                persistState();
+                renderStardustJar();
+                if (state.jar >= 100) {
+                    showToast("Supernova reached in Stardust Jar — tap jar to release burst");
+                }
+            }
+
+            function renderStardustJar() {
+                const liquid = document.getElementById("stardust-liquid");
+                const label = document.getElementById("jar-luminescence-label");
+                if (liquid) liquid.style.height = state.jar + "%";
+                if (label) label.textContent = state.jar + "% LUMINESCENCE";
+            }
+
+            function renderNotes() {
+                const badge = document.getElementById("notes-count-badge");
+                if (badge) badge.textContent = state.notes.length + (state.notes.length === 1 ? " Note" : " Notes");
+
+                const list = document.getElementById("notes-list");
+                if (!list) return;
+                if (!state.notes.length) {
+                    list.innerHTML = '<div class="font-italic-trim text-xs">No saved notes yet</div>';
+                    return;
+                }
+                list.innerHTML = state.notes.map(function (n) {
+                    return (
+                        '<div class="p-2.5 rounded-xl bg-white/80 border border-pink-200 flex items-start justify-between gap-2">' +
+                        '<div class="text-sm">' +
+                        (n.title ? '<div class="font-medium">' + stripQuotes(n.title) + "</div>" : "") +
+                        '<div class="text-xs opacity-90">' + stripQuotes(n.body) + "</div>" +
+                        "</div>" +
+                        '<button type="button" data-action="delete-note" data-id="' + n.id + '" class="pill-btn py-1 px-2 text-xs">✕</button>' +
+                        "</div>"
+                    );
+                }).join("");
+            }
+
+            function renderGallery() {
+                const badge = document.getElementById("gallery-count-badge");
+                if (badge) badge.textContent = state.photos.length + (state.photos.length === 1 ? " Photo" : " Photos");
+
+                const grid = document.getElementById("gallery-grid");
+                if (!grid) return;
+                if (!state.photos.length) {
+                    grid.innerHTML = '<div class="col-span-full font-italic-trim text-xs">No photos saved yet</div>';
+                    return;
+                }
+                grid.innerHTML = state.photos.map(function (p) {
+                    return (
+                        '<div class="rounded-xl overflow-hidden bg-white/85 border border-pink-200 p-1.5 space-y-1">' +
+                        '<img src="' + p.src + '" alt="' + stripQuotes(p.caption) + '" data-action="open-lightbox" data-id="' + p.id + '" class="w-full h-24 object-cover rounded-lg cursor-pointer" />' +
+                        '<div class="flex items-center justify-between gap-1">' +
+                        '<span class="text-xs truncate">' + stripQuotes(p.caption) + "</span>" +
+                        '<button type="button" data-action="delete-photo" data-id="' + p.id + '" class="pill-btn py-0.5 px-1.5 text-[11px]">✕</button>' +
+                        "</div>" +
+                        "</div>"
+                    );
+                }).join("");
+            }
+
+            function renderCornBar() {
+                document.querySelectorAll("[data-action='select-corn-flavor']").forEach(function (btn) {
+                    btn.classList.toggle("is-active", btn.getAttribute("data-flavor") === state.cornFlavor);
+                });
+
+                const flavorEl = document.getElementById("corn-active-flavor");
+                if (flavorEl) flavorEl.textContent = stripQuotes(state.cornFlavor);
+
+                const badge = document.getElementById("corn-count-badge");
+                if (badge) badge.textContent = state.cornTreats.length + " Treats Popped";
+
+                const recent = document.getElementById("corn-recent-list");
+                if (recent) {
+                    recent.innerHTML = state.cornTreats.slice(0, 4).map(function (t) {
+                        return '<div class="px-2.5 py-1 rounded-lg bg-white/80 border border-pink-200 flex justify-between"><span>' + stripQuotes(t.flavor) + '</span><span class="font-mono-trim">' + t.time + "</span></div>";
+                    }).join("");
+                }
+            }
+
+            function renderStaffRoster() {
+                const grid = document.getElementById("staff-roster-grid");
+                const badge = document.getElementById("staff-on-shift-badge");
+                let onCount = 0;
+
+                if (grid) {
+                    grid.innerHTML = ENSEMBLE_STAFF.map(function (member) {
+                        const active = Boolean(state.shifts[member.id]);
+                        if (active) onCount++;
+                        return (
+                            '<div class="p-3 rounded-2xl bg-white/80 border border-pink-200 flex items-center justify-between gap-2">' +
+                            "<div>" +
+                            '<div class="font-medium text-sm">' + member.name + "</div>" +
+                            '<div class="font-italic-trim text-xs">' + member.role + "</div>" +
+                            "</div>" +
+                            '<button type="button" data-action="toggle-staff" data-id="' + member.id + '" class="pill-btn text-xs ' + (active ? "is-active" : "") + '">' +
+                            (active ? "On Shift" : "Off Shift") +
+                            "</button>" +
+                            "</div>"
+                        );
+                    }).join("");
+                }
+
+                if (badge) badge.textContent = onCount + " / " + ENSEMBLE_STAFF.length + " On Shift";
+            }
+
+            function renderPage2() {
+                const p2Emojis = document.getElementById("page2-emojis");
+                if (p2Emojis) {
+                    p2Emojis.innerHTML = state.emojis.length
+                        ? state.emojis.map(function (e) { return '<span class="pill-btn px-2.5 py-1 cursor-default">' + e + "</span>"; }).join("")
+                        : '<span class="font-italic-trim text-xs">No saved emojis</span>';
+                }
+
+                const p2Wishes = document.getElementById("page2-wishes");
+                if (p2Wishes) {
+                    p2Wishes.innerHTML = state.wishes.length
+                        ? state.wishes.map(function (w) {
+                            return '<li class="p-2 rounded-xl bg-white/80 border border-pink-200 flex justify-between"><span>' + stripQuotes(w.text) + '</span><span class="font-mono-trim">' + (w.done ? "DONE" : "OPEN") + "</span></li>";
+                        }).join("")
+                        : '<li class="font-italic-trim text-xs">No wishes</li>';
+                }
+
+                const p2Notes = document.getElementById("page2-notes");
+                if (p2Notes) {
+                    p2Notes.innerHTML = state.notes.length
+                        ? state.notes.map(function (n) {
+                            return '<div class="p-2.5 rounded-xl bg-white/80 border border-pink-200">' +
+                                (n.title ? '<div class="font-medium">' + stripQuotes(n.title) + "</div>" : "") +
+                                '<div class="text-xs">' + stripQuotes(n.body) + "</div></div>";
+                        }).join("")
+                        : '<div class="font-italic-trim text-xs">No saved notes</div>';
+                }
+
+                const p2Photos = document.getElementById("page2-photos");
+                if (p2Photos) {
+                    p2Photos.innerHTML = state.photos.length
+                        ? state.photos.map(function (p) {
+                            return '<div class="rounded-xl overflow-hidden bg-white/80 border border-pink-200 p-1.5"><img src="' + p.src + '" alt="' + stripQuotes(p.caption) + '" class="w-full h-24 object-cover rounded-lg" /><div class="text-xs mt-1 truncate">' + stripQuotes(p.caption) + "</div></div>";
+                        }).join("")
+                        : '<div class="col-span-full font-italic-trim text-xs">No saved photos</div>';
+                }
+
+                const p2Corn = document.getElementById("page2-corn");
+                if (p2Corn) {
+                    p2Corn.innerHTML = state.cornTreats.length
+                        ? state.cornTreats.map(function (t) {
+                            return '<div class="p-2 rounded-xl bg-white/80 border border-pink-200 flex justify-between"><span>' + stripQuotes(t.flavor) + '</span><span class="font-mono-trim">' + t.time + "</span></div>";
+                        }).join("")
+                        : '<div class="font-italic-trim text-xs">No corn treats popped yet</div>';
+                }
+
+                const p2Shifts = document.getElementById("page2-shifts");
+                if (p2Shifts) {
+                    const activeNames = ENSEMBLE_STAFF.filter(function (m) { return Boolean(state.shifts[m.id]); }).map(function (m) { return m.name; });
+                    p2Shifts.textContent = "ON SHIFT: " + (activeNames.length ? activeNames.join(", ") : "None");
+                }
+            }
+
+            function syncPageAndGateUI() {
+                if (state.isUnlocked) {
+                    document.body.classList.remove("sanctuary-locked");
+                } else {
+                    document.body.classList.add("sanctuary-locked");
+                    stopSoundscape();
+                }
+
+                const statusBadge = document.getElementById("status-badge");
+                if (statusBadge) {
+                    statusBadge.textContent = state.isUnlocked ? "VIP Unlocked" : "Locked";
+                    statusBadge.classList.toggle("is-active", state.isUnlocked);
+                }
+
+                const lockBtn = document.getElementById("btn-lock-vip");
+                if (lockBtn) {
+                    lockBtn.style.display = state.isUnlocked ? "inline-flex" : "none";
+                }
+
+                const priceBadge = document.getElementById("gate-price-badge");
+                if (priceBadge) priceBadge.textContent = stripQuotes(state.priceLabel);
+
+                const upiDisp = document.getElementById("upi-id-display");
+                if (upiDisp) upiDisp.textContent = stripQuotes(state.upiId);
+
+                const customQrImg = document.getElementById("upi-custom-qr-img");
+                const defaultQrSvg = document.getElementById("upi-default-qr-svg");
+                if (customQrImg && defaultQrSvg) {
+                    if (state.customQr) {
+                        customQrImg.src = state.customQr;
+                        customQrImg.style.display = "block";
+                        defaultQrSvg.style.display = "none";
+                    } else {
+                        customQrImg.style.display = "none";
+                        defaultQrSvg.style.display = "inline-flex";
+                        if (!defaultQrSvg.innerHTML) defaultQrSvg.innerHTML = buildQrSvg("UPI QR Code");
+                    }
+                }
+
+                const cardLabel = document.getElementById("card-gateway-label");
+                if (cardLabel) cardLabel.textContent = stripQuotes(state.gatewayLabel);
+
+                document.querySelectorAll("[data-action='set-pay-tab']").forEach(function (btn) {
+                    btn.classList.toggle("is-active", btn.getAttribute("data-tab") === state.payTab);
+                });
+                const pUpi = document.getElementById("panel-upi");
+                const pCard = document.getElementById("panel-card");
+                if (pUpi) pUpi.style.display = state.payTab === "upi" ? "grid" : "none";
+                if (pCard) pCard.style.display = state.payTab === "card" ? "block" : "none";
+
+                const p1 = document.getElementById("page1-view");
+                const p2 = document.getElementById("page2-view");
+                const n1 = document.getElementById("nav-page1");
+                const n2 = document.getElementById("nav-page2");
+
+                if (p1) p1.style.display = state.page === "page1" ? "block" : "none";
+                if (p2) p2.style.display = state.page === "page2" ? "block" : "none";
+                if (n1) n1.classList.toggle("is-active", state.page === "page1");
+                if (n2) n2.classList.toggle("is-active", state.page === "page2");
+            }
+
+            function renderAll() {
+                applyAuraAndColor();
+                renderSoundControls();
+                renderEmojiTray();
+                renderWishes();
+                renderStardustJar();
+                renderNotes();
+                renderGallery();
+                renderCornBar();
+                renderStaffRoster();
+                syncPageAndGateUI();
+                renderPage2();
+            }
+
+            /* =================================================================
+               7. PRIVATE ADMIN STUDIO & UNLOCK HELPERS
+               ================================================================= */
+            function grantVipAccess(sourceLabel, x, y) {
+                state.isUnlocked = true;
+                state.unlockSource = sourceLabel;
+                state.aura = "royal-vip";
+                persistState();
+                bumpStardustJar(20);
+                renderAll();
+                spawnSparkleBurst(x || window.innerWidth * 0.5, y || window.innerHeight * 0.4, 38);
+                playChimeNote(880, "sine", 0.5);
+                showToast("VIP Sanctuary Unlocked via " + sourceLabel);
+            }
+
+            function revokeVipAccess(x, y) {
+                stopSoundscape();
+                state.isUnlocked = false;
+                persistState();
+                renderAll();
+                spawnSparkleBurst(x || window.innerWidth * 0.5, y || window.innerHeight * 0.3, 18);
+                showToast("Sanctuary locked");
+            }
+
+            function closeModals() {
+                document.querySelectorAll(".sanctuary-modal").forEach(function (m) {
+                    m.classList.remove("is-open");
+                });
+            }
+
+            function openPrivateAdmin() {
+                const modal = document.getElementById("private-admin-modal");
+                const authBox = document.getElementById("admin-auth-box");
+                const cfgBox = document.getElementById("admin-settings-box");
+                const errEl = document.getElementById("admin-auth-error");
+                if (errEl) errEl.textContent = "";
+                if (authBox) authBox.style.display = "block";
+                if (cfgBox) cfgBox.style.display = "none";
+                if (modal) modal.classList.add("is-open");
+            }
+
+            window.openAdminPortal = openPrivateAdmin;
+
+            function checkPrivateAdminHashOrQuery() {
+                const hashVal = (window.location.hash || "").toLowerCase();
+                const searchVal = (window.location.search || "").toLowerCase();
+                if (hashVal === "#admin-portal" || hashVal === "#admin" || searchVal.indexOf("admin=1") !== -1) {
+                    openPrivateAdmin();
+                }
+            }
+
+            function copyToClipboard(text, message) {
+                try {
+                    const helper = document.createElement("textarea");
+                    helper.value = text;
+                    helper.style.position = "fixed";
+                    helper.style.opacity = "0";
+                    document.body.appendChild(helper);
+                    helper.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(helper);
+                } catch (err) {
+                    // Clipboard fallback ignored
+                }
+                showToast(message);
+            }
+
+            /* =================================================================
+               8. EVENT DELEGATION & INPUT HANDLERS
+               ================================================================= */
+            document.addEventListener("click", function (ev) {
+                const btn = ev.target.closest("[data-action]");
+                const rect = btn ? btn.getBoundingClientRect() : null;
+                const cx = rect ? rect.left + rect.width / 2 : ev.clientX;
+                const cy = rect ? rect.top + rect.height / 2 : ev.clientY;
+
+                if (ev.target.classList && ev.target.classList.contains("sanctuary-modal")) {
+                    closeModals();
+                    return;
+                }
+
+                if (!btn) {
+                    spawnSparkleBurst(ev.clientX, ev.clientY, 10);
+                    return;
+                }
+
+                const action = btn.getAttribute("data-action");
+
+                // Gate & Private Admin actions are always reachable
+                const allowedWhenLocked = {
+                    "set-pay-tab": true,
+                    "copy-upi-id": true,
+                    "unlock-upi": true,
+                    "card-info": true,
+                    "unlock-vip-code": true,
+                    "unlock-admin-studio": true,
+                    "save-admin-config": true,
+                    "close-modals": true
+                };
+
+                if (!state.isUnlocked && !allowedWhenLocked[action]) {
+                    const gateMsg = document.getElementById("gate-feedback");
+                    if (gateMsg) gateMsg.textContent = "Please unlock Starlight VIP first to use sanctuary features";
+                    return;
+                }
+
+                if (action === "set-pay-tab") {
+                    state.payTab = btn.getAttribute("data-tab") === "card" ? "card" : "upi";
+                    syncPageAndGateUI();
+                } else if (action === "copy-upi-id") {
+                    copyToClipboard(state.upiId, "UPI ID copied: " + state.upiId);
+                } else if (action === "unlock-upi") {
+                    const inp = document.getElementById("upi-utr-input");
+                    const fb = document.getElementById("gate-feedback");
+                    const utr = stripQuotes(inp ? inp.value : "").trim();
+                    if (utr.length < 5) {
+                        if (fb) fb.textContent = "Please enter your UPI UTR / Transaction ID";
+                        return;
+                    }
+                    if (fb) fb.textContent = "";
+                    grantVipAccess("UPI Pay (" + utr + ")", cx, cy);
+                } else if (action === "card-info") {
+                    const fb = document.getElementById("gate-feedback");
+                    if (fb) fb.textContent = stripQuotes(state.gatewayLabel) + " — enter your VIP Access Code below to unlock";
+                } else if (action === "unlock-vip-code") {
+                    const inp = document.getElementById("vip-code-input");
+                    const fb = document.getElementById("gate-feedback");
+                    const entered = stripQuotes(inp ? inp.value : "").trim().toUpperCase();
+                    const validCode = stripQuotes(state.vipCode || "STAR2026").trim().toUpperCase();
+                    if (!entered || entered !== validCode) {
+                        if (fb) fb.textContent = "Incorrect VIP Access Code (default code: " + validCode + ")";
+                        return;
+                    }
+                    if (fb) fb.textContent = "";
+                    grantVipAccess("VIP Code (" + entered + ")", cx, cy);
+                } else if (action === "lock-vip") {
+                    revokeVipAccess(cx, cy);
+                } else if (action === "switch-page") {
+                    state.page = btn.getAttribute("data-page") || "page1";
+                    persistState();
+                    syncPageAndGateUI();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 18);
+                } else if (action === "filter-section") {
+                    const filter = btn.getAttribute("data-filter") || "all";
+                    state.sectionFilter = filter;
+                    document.querySelectorAll("[data-action='filter-section']").forEach(function (b) {
+                        b.classList.toggle("is-active", b.getAttribute("data-filter") === filter);
+                    });
+                    const sections = {
+                        "music-emoji": document.getElementById("sec-music-emoji"),
+                        "wishes-jar": document.getElementById("sec-wishes-jar"),
+                        "notes-gallery": document.getElementById("sec-notes-gallery"),
+                        "corn-bar": document.getElementById("sec-corn-bar"),
+                        "staff-roster": document.getElementById("sec-staff-roster")
+                    };
+                    Object.keys(sections).forEach(function (key) {
+                        const sec = sections[key];
+                        if (!sec) return;
+                        if (filter === "all" || filter === key) {
+                            sec.style.display = (key === "corn-bar" || key === "staff-roster") ? "block" : "grid";
+                        } else {
+                            sec.style.display = "none";
+                        }
+                    });
+                    spawnSparkleBurst(cx, cy, 14);
+                } else if (action === "set-aura") {
+                    const auraKey = btn.getAttribute("data-aura");
+                    if (AURA_THEMES[auraKey]) {
+                        state.aura = auraKey;
+                        persistState();
+                        applyAuraAndColor();
+                        spawnSparkleBurst(cx, cy, 26);
+                        playChimeNote(659.25, "sine", 0.35);
+                        showToast("Aura set to " + AURA_THEMES[auraKey].name);
+                    }
+                } else if (action === "reset-palette") {
+                    state.aura = "pink-lavender";
+                    state.customTint = "";
+                    persistState();
+                    applyAuraAndColor();
+                    spawnSparkleBurst(cx, cy, 20);
+                    showToast("Palette reset to Pink & Lavender Dream");
+                } else if (action === "sprinkle-burst") {
+                    spawnSparkleBurst(cx, cy, 36);
+                    for (let i = 0; i < 3; i++) {
+                        spawnSparkleBurst(Math.random() * window.innerWidth, Math.random() * window.innerHeight * 0.75, 16);
+                    }
+                    playChimeNote(783.99, "sine", 0.45);
+                    showToast("Starlight sparkle shower released");
+                } else if (action === "select-sound") {
+                    const sKey = btn.getAttribute("data-sound");
+                    if (SOUNDSCAPES[sKey]) {
+                        state.sound = sKey;
+                        persistState();
+                        renderSoundControls();
+                        if (isPlayingSound) startSoundscape();
+                        else playChimeNote(SOUNDSCAPES[sKey].notes[0], SOUNDSCAPES[sKey].type, 0.35);
+                        spawnSparkleBurst(cx, cy, 14);
+                    }
+                } else if (action === "toggle-audio") {
+                    if (isPlayingSound) stopSoundscape();
+                    else startSoundscape();
+                    spawnSparkleBurst(cx, cy, 16);
+                } else if (action === "pick-emoji") {
+                    const emoji = btn.getAttribute("data-emoji") || "✨";
+                    if (!state.emojis.includes(emoji)) {
+                        state.emojis.push(emoji);
+                        persistState();
+                    }
+                    const noteBody = document.getElementById("note-body-input");
+                    if (noteBody) {
+                        noteBody.value = (noteBody.value || "") + emoji;
+                    }
+                    renderEmojiTray();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 14);
+                    playChimeNote(659.25, "sine", 0.25);
+                } else if (action === "clear-emojis") {
+                    state.emojis = [];
+                    persistState();
+                    renderEmojiTray();
+                    renderPage2();
+                } else if (action === "toggle-wish") {
+                    const id = btn.getAttribute("data-id");
+                    const wish = state.wishes.find(function (w) { return w.id === id; });
+                    if (wish) {
+                        wish.done = !wish.done;
+                        persistState();
+                        if (wish.done) bumpStardustJar(12);
+                        renderWishes();
+                        renderPage2();
+                        spawnSparkleBurst(cx, cy, 18);
+                        playChimeNote(783.99, "sine", 0.35);
+                    }
+                } else if (action === "delete-wish") {
+                    const id = btn.getAttribute("data-id");
+                    state.wishes = state.wishes.filter(function (w) { return w.id !== id; });
+                    persistState();
+                    renderWishes();
+                    renderPage2();
+                } else if (action === "add-stardust") {
+                    bumpStardustJar(15);
+                    spawnSparkleBurst(cx, cy, 24);
+                    playChimeNote(659.25, "sine", 0.35);
+                } else if (action === "tap-jar") {
+                    if (state.jar >= 100) {
+                        state.jar = 0;
+                        persistState();
+                        renderStardustJar();
+                        spawnSparkleBurst(cx, cy, 46);
+                        playChimeNote(880, "sine", 0.55);
+                        showToast("Supernova burst complete");
+                    } else {
+                        bumpStardustJar(10);
+                        spawnSparkleBurst(cx, cy, 18);
+                        playChimeNote(587.33, "sine", 0.3);
+                    }
+                } else if (action === "ask-oracle") {
+                    oracleIdx = (oracleIdx + 1) % ORACLE_REFLECTIONS.length;
+                    const refEl = document.getElementById("oracle-reflection");
+                    if (refEl) refEl.textContent = stripQuotes(ORACLE_REFLECTIONS[oracleIdx]);
+                    spawnSparkleBurst(cx, cy, 24);
+                    playChimeNote(783.99, "sine", 0.42);
+                } else if (action === "save-note") {
+                    const tInp = document.getElementById("note-title-input");
+                    const bInp = document.getElementById("note-body-input");
+                    const fb = document.getElementById("note-feedback");
+                    const body = stripQuotes(bInp ? bInp.value : "").trim();
+                    const title = stripQuotes(tInp ? tInp.value : "").trim();
+                    if (!body) {
+                        if (fb) fb.textContent = "Please write a note before saving";
+                        return;
+                    }
+                    state.notes.unshift({ id: "note-" + Date.now(), title: title, body: body });
+                    persistState();
+                    if (tInp) tInp.value = "";
+                    if (bInp) bInp.value = "";
+                    if (fb) fb.textContent = "Saved to Starlight Notes (+5% jar glow)";
+                    bumpStardustJar(5);
+                    renderNotes();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 20);
+                    playChimeNote(659.25, "sine", 0.35);
+                } else if (action === "delete-note") {
+                    const id = btn.getAttribute("data-id");
+                    state.notes = state.notes.filter(function (n) { return n.id !== id; });
+                    persistState();
+                    renderNotes();
+                    renderPage2();
+                } else if (action === "choose-gallery-file") {
+                    const fInp = document.getElementById("gallery-file-input");
+                    if (fInp) fInp.click();
+                } else if (action === "save-photo") {
+                    const uInp = document.getElementById("gallery-url-input");
+                    const cInp = document.getElementById("gallery-caption-input");
+                    const fb = document.getElementById("gallery-feedback");
+                    const fInp = document.getElementById("gallery-file-input");
+                    const imgSrc = uploadedPhotoData || (uInp ? uInp.value.trim() : "");
+                    if (!imgSrc) {
+                        if (fb) fb.textContent = "Upload an image file or enter an image URL first";
+                        return;
+                    }
+                    const cap = stripQuotes(cInp ? cInp.value : "").trim() || "Starlight Keepsake";
+                    state.photos.unshift({ id: "photo-" + Date.now(), src: imgSrc, caption: cap });
+                    persistState();
+                    uploadedPhotoData = "";
+                    if (uInp) uInp.value = "";
+                    if (cInp) cInp.value = "";
+                    if (fInp) fInp.value = "";
+                    if (fb) fb.textContent = "Photo saved to gallery (+5% jar glow)";
+                    bumpStardustJar(5);
+                    renderGallery();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 22);
+                    playChimeNote(783.99, "sine", 0.35);
+                } else if (action === "delete-photo") {
+                    const id = btn.getAttribute("data-id");
+                    state.photos = state.photos.filter(function (p) { return p.id !== id; });
+                    persistState();
+                    renderGallery();
+                    renderPage2();
+                } else if (action === "open-lightbox") {
+                    const id = btn.getAttribute("data-id");
+                    const found = state.photos.find(function (p) { return p.id === id; });
+                    if (found) {
+                        const modal = document.getElementById("lightbox-modal");
+                        const img = document.getElementById("lightbox-image");
+                        const cap = document.getElementById("lightbox-caption");
+                        if (img) img.src = found.src;
+                        if (cap) cap.textContent = stripQuotes(found.caption);
+                        if (modal) modal.classList.add("is-open");
+                    }
+                } else if (action === "select-corn-flavor") {
+                    state.cornFlavor = btn.getAttribute("data-flavor") || "Rose Strawberry Glaze";
+                    persistState();
+                    renderCornBar();
+                    spawnSparkleBurst(cx, cy, 14);
+                } else if (action === "pop-corn") {
+                    const stage = document.getElementById("corn-kettle-stage");
+                    if (stage) {
+                        for (let i = 0; i < 8; i++) {
+                            const pop = document.createElement("span");
+                            pop.className = "pop-kernel";
+                            pop.textContent = i % 2 === 0 ? "🍿" : "✨";
+                            pop.style.left = (15 + Math.random() * 70) + "%";
+                            pop.style.fontSize = (15 + Math.random() * 9) + "px";
+                            pop.style.setProperty("--drift-x", Math.round((Math.random() - 0.5) * 80) + "px");
+                            stage.appendChild(pop);
+                            window.setTimeout(function () {
+                                if (pop.parentNode) pop.parentNode.removeChild(pop);
+                            }, 1050);
+                        }
+                    }
+                    state.cornTreats.unshift({
+                        flavor: state.cornFlavor,
+                        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+                    });
+                    state.cornTreats = state.cornTreats.slice(0, 12);
+                    persistState();
+                    bumpStardustJar(5);
+                    renderCornBar();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 22);
+                    playChimeNote(587.33, "triangle", 0.25);
+                } else if (action === "toggle-staff") {
+                    const id = btn.getAttribute("data-id");
+                    state.shifts[id] = !state.shifts[id];
+                    persistState();
+                    renderStaffRoster();
+                    renderPage2();
+                    spawnSparkleBurst(cx, cy, 14);
+                } else if (action === "unlock-admin-studio") {
+                    const passInp = document.getElementById("admin-password-input");
+                    const errEl = document.getElementById("admin-auth-error");
+                    const entered = passInp ? passInp.value : "";
+                    if (entered !== state.adminPass) {
+                        if (errEl) errEl.textContent = "Incorrect private admin password";
+                        return;
+                    }
+                    if (errEl) errEl.textContent = "";
+                    const authBox = document.getElementById("admin-auth-box");
+                    const cfgBox = document.getElementById("admin-settings-box");
+                    if (authBox) authBox.style.display = "none";
+                    if (cfgBox) cfgBox.style.display = "block";
+
+                    document.getElementById("cfg-price").value = state.priceLabel;
+                    document.getElementById("cfg-vip-code").value = state.vipCode;
+                    document.getElementById("cfg-upi-id").value = state.upiId;
+                    document.getElementById("cfg-rzp-key").value = state.gatewayLabel;
+                    document.getElementById("cfg-qr-url").value = state.customQr.startsWith("http") ? state.customQr : "";
+                    document.getElementById("cfg-new-pass").value = "";
+                } else if (action === "save-admin-config") {
+                    state.priceLabel = stripQuotes(document.getElementById("cfg-price").value).trim() || state.priceLabel;
+                    state.vipCode = stripQuotes(document.getElementById("cfg-vip-code").value).trim() || state.vipCode;
+                    state.upiId = stripQuotes(document.getElementById("cfg-upi-id").value).trim() || state.upiId;
+                    state.gatewayLabel = stripQuotes(document.getElementById("cfg-rzp-key").value).trim() || state.gatewayLabel;
+                    const qrUrl = document.getElementById("cfg-qr-url").value.trim();
+                    if (uploadedQrData) {
+                        state.customQr = uploadedQrData;
+                    } else if (qrUrl) {
+                        state.customQr = qrUrl;
+                    }
+                    const newPass = document.getElementById("cfg-new-pass").value;
+                    if (newPass && newPass.trim().length >= 4) {
+                        state.adminPass = newPass.trim();
+                    }
+                    uploadedQrData = "";
+                    persistState();
+                    syncPageAndGateUI();
+                    const stEl = document.getElementById("admin-save-status");
+                    if (stEl) stEl.textContent = "Private settings saved";
+                    spawnSparkleBurst(cx, cy, 22);
+                } else if (action === "close-modals") {
+                    closeModals();
+                }
+            });
+
+            document.addEventListener("submit", function (ev) {
+                if (ev.target && ev.target.id === "wish-form") {
+                    ev.preventDefault();
+                    if (!state.isUnlocked) return;
+                    const inp = document.getElementById("wish-input");
+                    const text = stripQuotes(inp ? inp.value : "").trim();
+                    if (!text) return;
+                    state.wishes.unshift({ id: "wish-" + Date.now(), text: text, done: false });
+                    persistState();
+                    if (inp) inp.value = "";
+                    renderWishes();
+                    renderPage2();
+                    const rect = inp.getBoundingClientRect();
+                    spawnSparkleBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 18);
+                    playChimeNote(587.33, "sine", 0.3);
+                }
+            });
+
+            document.addEventListener("input", function (ev) {
+                if (ev.target && ev.target.id === "custom-tint-picker") {
+                    state.customTint = ev.target.value;
+                    persistState();
+                    applyAuraAndColor();
+                } else if (ev.target && ev.target.id === "audio-volume-slider") {
+                    state.volume = Number(ev.target.value) || 0;
+                    persistState();
+                    renderSoundControls();
+                }
+            });
+
+            document.addEventListener("change", function (ev) {
+                const target = ev.target;
+                if (!target || target.type !== "file" || !target.files || !target.files[0]) return;
+                const file = target.files[0];
+                const reader = new FileReader();
+                reader.onload = function (loadEv) {
+                    const result = loadEv.target && loadEv.target.result ? String(loadEv.target.result) : "";
+                    if (target.id === "gallery-file-input") {
+                        uploadedPhotoData = result;
+                        const fb = document.getElementById("gallery-feedback");
+                        if (fb) fb.textContent = "Selected file: " + file.name;
+                    } else if (target.id === "cfg-qr-file") {
+                        uploadedQrData = result;
+                        const st = document.getElementById("admin-save-status");
+                        if (st) st.textContent = "QR image loaded: " + file.name;
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+
+            window.addEventListener("hashchange", checkPrivateAdminHashOrQuery);
+            window.addEventListener("keydown", function (ev) {
+                if (ev.key === "Escape") closeModals();
+            });
+
+            /* =================================================================
+               9. STARTUP & ANIMATION LOOP
+               ================================================================= */
+            resizeGlitterCanvas();
+            window.addEventListener("resize", resizeGlitterCanvas);
+            renderAll();
+            checkPrivateAdminHashOrQuery();
+
+            spawnSparkleBurst(window.innerWidth * 0.5, window.innerHeight * 0.28, 54);
+            for (let k = 0; k < 40; k++) {
+                spawnAmbientSparkle();
+            }
+            window.setInterval(spawnAmbientSparkle, 140);
+            window.requestAnimationFrame(renderGlitterFrame);
+        });
+    </script>
+</body>
+</html>
